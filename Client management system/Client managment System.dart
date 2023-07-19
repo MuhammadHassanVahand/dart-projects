@@ -36,11 +36,11 @@ adminBlock() {
 addClient() {
   print("");
   print("   !========= Adding Client ==========!");
-  String? cId;
+  int? cId;
   bool isUnique = false;
   while (!isUnique) {
     stdout.write("Enter client id! should be unique in numbers: ");
-    cId = stdin.readLineSync();
+    cId = int.parse(stdin.readLineSync()!);
 
     isUnique = true;
 
@@ -145,7 +145,7 @@ updateClient() {
         if (options == 1) {
           print("/Editing Email/");
           stdout.write("Enter Client id: ");
-          String id = stdin.readLineSync()!;
+          int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
             if (id != clients[i]["id"]) {
               print("$id does not exist");
@@ -159,13 +159,13 @@ updateClient() {
         } else if (options == 2) {
           print("/Editing Number/");
           stdout.write("Enter Client id: ");
-          String id = stdin.readLineSync()!;
+          int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
             if (id != clients[i]["id"]) {
               print("$id does not exist");
             } else if (id == clients[i]["id"]) {
               stdout.write("Enter New number: ");
-              String number = stdin.readLineSync()!;
+              int number = int.parse(stdin.readLineSync()!);
               clients[i]["number"] = number;
               print("Number updated Successfully!");
             }
