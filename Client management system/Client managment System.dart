@@ -1,7 +1,7 @@
 import 'dart:io';
 
 List<Map<String, dynamic>> adminLogin = [
-  {"email": "hassan12rehan@gmail.com", "password": "1234"},
+  {"email": "hassan12rehan@gmail.com", "password": "12345"},
   {"email": "muhammadzaeem@gmail.com", "password": "1234"}
 ];
 List<Map<String, dynamic>> clients = [];
@@ -36,8 +36,22 @@ adminBlock() {
 addClient() {
   print("");
   print("   !========= Adding Client ==========!");
-  stdout.write("Enter client id! should be unique in numbers: ");
-  String cId = stdin.readLineSync()!;
+  String? cId;
+  bool isUnique = false;
+  while (!isUnique) {
+    stdout.write("Enter client id! should be unique in numbers: ");
+    cId = stdin.readLineSync();
+
+    isUnique = true;
+
+    for (var i = 0; i < clients.length; i++) {
+      if (cId == clients[i]["id"]) {
+        print("$cId is already exist!");
+        isUnique = false;
+        break;
+      }
+    }
+  }
 
   stdout.write("Enter client name: ");
   String cName = stdin.readLineSync()!;
@@ -90,14 +104,22 @@ removeClient() {
   if (clients.isEmpty) {
     print("No Client found to remove");
   } else {
-    stdout.write("Enter client id, Who you want to remove: ");
-    String id = stdin.readLineSync()!;
-    for (var i = 0; i < clients.length; i++) {
-      if (id == clients[i]["id"]) {
-        clients.removeWhere((value) => value["id"] == id);
-        print("Client remove successfully");
-      } else {
-        print("$id: id Does not exist!");
+    print("Remove all or only 1 ?");
+    stdout.write("1 for Remove all or 2 for only one: ");
+    int option = int.parse(stdin.readLineSync()!);
+    if (option == 1) {
+      clients.clear();
+      print("All clients remove successfully");
+    } else {
+      stdout.write("Enter client id, Who you want to remove: ");
+      String id = stdin.readLineSync()!;
+      for (var i = 0; i < clients.length; i++) {
+        if (id == clients[i]["id"]) {
+          clients.removeWhere((value) => value["id"] == id);
+          print("Client remove successfully");
+        } else {
+          print("$id: id Does not exist!");
+        }
       }
     }
   }
@@ -108,46 +130,52 @@ updateClient() {
   print("   !========= Updatinging Client ==========!");
   print("Displaying data before update!");
   displayClient();
-  if (clients.isEmpty) {
-    print("Can't update empty list");
-  } else {
-    print("Do you want to update client ? (yes/no)");
-    String option = stdin.readLineSync()!;
-    if (option == "yes" || option == "Yes") {
-      print("Edit Email or phone");
-      print("For email: 1");
-      print("For number: 2");
-      int options = int.parse(stdin.readLineSync()!);
-      if (options == 1) {
-        print("Editing Email");
-        stdout.write("Enter Client id: ");
-        String id = stdin.readLineSync()!;
-        for (var i = 0; i < clients.length; i++) {
-          if (id != clients[i]["id"]) {
-            print("$id does not exist");
-          } else if (id == clients[i]["id"]) {
-            stdout.write("Enter New email: ");
-            String email = stdin.readLineSync()!;
-            clients[i]["email"] = email;
-            print("Email updated Successfully!");
+  while (true) {
+    if (clients.isEmpty) {
+      print("Can't update empty list");
+      break;
+    } else {
+      print("Do you want to update client ? (yes/no)");
+      String option = stdin.readLineSync()!;
+      if (option == "yes" || option == "Yes") {
+        print("Edit Email or phone");
+        print("For email: 1");
+        print("For number: 2");
+        int options = int.parse(stdin.readLineSync()!);
+        if (options == 1) {
+          print("/Editing Email/");
+          stdout.write("Enter Client id: ");
+          String id = stdin.readLineSync()!;
+          for (var i = 0; i < clients.length; i++) {
+            if (id != clients[i]["id"]) {
+              print("$id does not exist");
+            } else if (id == clients[i]["id"]) {
+              stdout.write("Enter New email: ");
+              String email = stdin.readLineSync()!;
+              clients[i]["email"] = email;
+              print("Email updated Successfully!");
+            }
           }
-        }
-      } else if (options == 2) {
-        print("Editing Number");
-        stdout.write("Enter Client id: ");
-        String id = stdin.readLineSync()!;
-        for (var i = 0; i < clients.length; i++) {
-          if (id != clients[i]["id"]) {
-            print("$id does not exist");
-          } else if (id == clients[i]["id"]) {
-            stdout.write("Enter New number: ");
-            String number = stdin.readLineSync()!;
-            clients[i]["number"] = number;
-            print("Number updated Successfully!");
+        } else if (options == 2) {
+          print("/Editing Number/");
+          stdout.write("Enter Client id: ");
+          String id = stdin.readLineSync()!;
+          for (var i = 0; i < clients.length; i++) {
+            if (id != clients[i]["id"]) {
+              print("$id does not exist");
+            } else if (id == clients[i]["id"]) {
+              stdout.write("Enter New number: ");
+              String number = stdin.readLineSync()!;
+              clients[i]["number"] = number;
+              print("Number updated Successfully!");
+            }
           }
+        } else {
+          print("Invalid input");
         }
       } else {
-        print("Invalid input");
+        false;
+        break;
       }
     }
   }
@@ -171,7 +199,7 @@ void main() {
       stdout.write("Enter your password: ");
       String password = stdin.readLineSync()!;
       for (var i = 0; i < adminLogin.length; i++) {
-        if (email == adminLogin[i]["email"] &&
+        if (email == adminLogin[i]["email"] ||
             password == adminLogin[i]["password"]) {
           print("Login Successful!");
           print("1 for admin");
