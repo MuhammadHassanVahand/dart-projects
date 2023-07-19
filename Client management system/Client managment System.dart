@@ -198,9 +198,14 @@ void main() {
       String email = stdin.readLineSync()!;
       stdout.write("Enter your password: ");
       String password = stdin.readLineSync()!;
+
+      bool logginSuccessful = false;
+
       for (var i = 0; i < adminLogin.length; i++) {
-        if (email == adminLogin[i]["email"] ||
+        if (email == adminLogin[i]["email"] &&
             password == adminLogin[i]["password"]) {
+          logginSuccessful = true;
+
           print("Login Successful!");
           print("1 for admin");
           print("0 for exit");
@@ -210,10 +215,10 @@ void main() {
           } else if (options == 0) {
             break;
           }
-        } else {
-          print("Incorrect Email or password! Try Again");
-          break;
         }
+      }
+      if (!logginSuccessful) {
+        print("Incorrect Email or password! Try Again");
       }
     } else if (option == 0) {
       again = false;
@@ -221,3 +226,50 @@ void main() {
     }
   }
 }
+
+
+// void main() {
+//   int options;
+//   bool again = true;
+//   while (again) {
+//     print(
+//         "%=================== Welcom 2 Client Management System =====================%");
+//     print("1 for admin login");
+//     print("0 for exit");
+//     int option = int.parse(stdin.readLineSync()!);
+//     if (option == 1) {
+//       print("Login As Admin");
+
+//       print("");
+//       stdout.write("Enter your email: ");
+//       String email = stdin.readLineSync()!;
+//       stdout.write("Enter your password: ");
+//       String password = stdin.readLineSync()!;
+
+//       bool loginSuccessful = false; // Flag to track login status
+
+//       for (var i = 0; i < adminLogin.length; i++) {
+//         if (email == adminLogin[i]["email"] &&
+//             password == adminLogin[i]["password"]) {
+//           loginSuccessful = true; // Set the flag to true if login is successful
+//           print("Login Successful!");
+//           print("1 for admin");
+//           print("0 for exit");
+//           options = int.parse(stdin.readLineSync()!);
+//           if (options == 1) {
+//             adminBlock();
+//           } else if (options == 0) {
+//             break;
+//           }
+//         }
+//       }
+
+//       if (!loginSuccessful) {
+//         print("Incorrect Email or password! Try Again");
+//       }
+//     } else if (option == 0) {
+//       again = false;
+//       break;
+//     }
+//   }
+// }
