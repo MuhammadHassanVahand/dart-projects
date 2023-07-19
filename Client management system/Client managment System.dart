@@ -147,13 +147,14 @@ updateClient() {
           stdout.write("Enter Client id: ");
           int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
-            if (id != clients[i]["id"]) {
-              print("$id does not exist");
-            } else if (id == clients[i]["id"]) {
+            if (id == clients[i]["id"]) {
               stdout.write("Enter New email: ");
               String email = stdin.readLineSync()!;
               clients[i]["email"] = email;
               print("Email updated Successfully!");
+            }
+            if (id != clients[i]["id"]) {
+              print("$id does not exist");
             }
           }
         } else if (options == 2) {
@@ -161,13 +162,14 @@ updateClient() {
           stdout.write("Enter Client id: ");
           int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
-            if (id != clients[i]["id"]) {
-              print("$id does not exist");
-            } else if (id == clients[i]["id"]) {
+            if (id == clients[i]["id"]) {
               stdout.write("Enter New number: ");
               int number = int.parse(stdin.readLineSync()!);
               clients[i]["number"] = number;
               print("Number updated Successfully!");
+            }
+            if (id != clients[i]["id"]) {
+              print("$id does not exist");
             }
           }
         } else {
@@ -187,10 +189,12 @@ void main() {
   while (again) {
     print(
         "%=================== Welcom 2 Client Management System =====================%");
+    print("");
     print("1 for admin login");
     print("0 for exit");
     int option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
+      print("");
       print("Login As Admin");
 
       print("");
@@ -205,8 +209,9 @@ void main() {
         if (email == adminLogin[i]["email"] &&
             password == adminLogin[i]["password"]) {
           logginSuccessful = true;
-
+          print("");
           print("Login Successful!");
+          print("");
           print("1 for admin");
           print("0 for exit");
           options = int.parse(stdin.readLineSync()!);
@@ -226,50 +231,3 @@ void main() {
     }
   }
 }
-
-
-// void main() {
-//   int options;
-//   bool again = true;
-//   while (again) {
-//     print(
-//         "%=================== Welcom 2 Client Management System =====================%");
-//     print("1 for admin login");
-//     print("0 for exit");
-//     int option = int.parse(stdin.readLineSync()!);
-//     if (option == 1) {
-//       print("Login As Admin");
-
-//       print("");
-//       stdout.write("Enter your email: ");
-//       String email = stdin.readLineSync()!;
-//       stdout.write("Enter your password: ");
-//       String password = stdin.readLineSync()!;
-
-//       bool loginSuccessful = false; // Flag to track login status
-
-//       for (var i = 0; i < adminLogin.length; i++) {
-//         if (email == adminLogin[i]["email"] &&
-//             password == adminLogin[i]["password"]) {
-//           loginSuccessful = true; // Set the flag to true if login is successful
-//           print("Login Successful!");
-//           print("1 for admin");
-//           print("0 for exit");
-//           options = int.parse(stdin.readLineSync()!);
-//           if (options == 1) {
-//             adminBlock();
-//           } else if (options == 0) {
-//             break;
-//           }
-//         }
-//       }
-
-//       if (!loginSuccessful) {
-//         print("Incorrect Email or password! Try Again");
-//       }
-//     } else if (option == 0) {
-//       again = false;
-//       break;
-//     }
-//   }
-// }
