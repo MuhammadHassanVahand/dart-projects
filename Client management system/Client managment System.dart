@@ -92,14 +92,17 @@ addClient() {
 
 //=======display client=========
 displayClient() {
+  print("");
+  print("   !========= Displaying Client/s ==========!");
   while (true) {
-    print("");
-    print("   !========= Displaying Client/s ==========!");
     if (clients.isEmpty) {
       print("No client found");
+      break;
     }
+    print("");
     print("Display only one Client press: 1");
     print("Display all Clients press: 2");
+    print("For exit press: 0");
     int option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
       print("");
@@ -120,8 +123,7 @@ displayClient() {
       if (!idExist) {
         print("Invalid id or this id does not exist ");
       }
-    }
-    if (option == 2) {
+    } else if (option == 2) {
       for (var i = 0; i < clients.length; i++) {
         print("Client id: ${clients[i]["id"]}");
         print("Client name: ${clients[i]["name"]}");
@@ -129,12 +131,11 @@ displayClient() {
         print("Client number: ${clients[i]["number"]}");
         print("");
       }
-    }
-    print("0 for Exit");
-    int exit = int.parse(stdin.readLineSync()!);
-    if (exit == 0) {
-      false;
+    } else if (option == 0) {
+      print("Exiting....");
       break;
+    } else {
+      print("Invalid input");
     }
   }
 }
@@ -142,14 +143,17 @@ displayClient() {
 //========display client project=========
 
 displayClientProject() {
+  print("");
+  print("   !========= Displaying Client's project ==========!");
   while (true) {
-    print("");
-    print("   !========= Displaying Client's project ==========!");
     if (clientsProjects.isEmpty) {
       print("No client found");
+      break;
     }
+    print("");
     print("Display only one Client' project press: 1");
     print("Display all Client's projetcs press: 2");
+    print("for exit press: 0");
     int option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
       bool idExist = false;
@@ -169,20 +173,19 @@ displayClientProject() {
       if (!idExist) {
         print("Invalid id or this id does not exist ");
       }
-    }
-    if (option == 2) {
+    } else if (option == 2) {
+      print("");
       for (var i = 0; i < clientsProjects.length; i++) {
         print("Client id: ${clientsProjects[i]["id"]}");
         print("Client name: ${clientsProjects[i]["name"]}");
         print("Client project: ${clientsProjects[i]["project"]}");
         print("");
       }
-    }
-    print("0 for Exit");
-    int exit = int.parse(stdin.readLineSync()!);
-    if (exit == 0) {
+    } else if (option == 0) {
       false;
       break;
+    } else {
+      print("Invalid input");
     }
   }
 }
@@ -241,6 +244,7 @@ updateClient() {
       print("Can't update empty list");
       break;
     } else {
+      print("");
       print("Do you want to update client ? (yes/no)");
       String option = stdin.readLineSync()!;
       if (option == "yes" || option == "Yes") {
@@ -258,13 +262,16 @@ updateClient() {
               String email = stdin.readLineSync()!;
               clients[i]["email"] = email;
               print("Email updated Successfully!");
+              break;
             }
             if (id != clients[i]["id"]) {
               print("$id does not exist");
+              break;
             }
           }
         } else if (options == 2) {
           print("/Editing Number/");
+          print("");
           stdout.write("Enter Client id: ");
           int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
@@ -273,9 +280,11 @@ updateClient() {
               int number = int.parse(stdin.readLineSync()!);
               clients[i]["number"] = number;
               print("Number updated Successfully!");
+              break;
             }
             if (id != clients[i]["id"]) {
               print("$id does not exist");
+              break;
             }
           }
         } else {
