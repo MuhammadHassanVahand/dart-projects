@@ -18,6 +18,7 @@ adminBlock() {
     print("For remove client press: 3");
     print("For update Client press: 4");
     print("For display Client's project press: 5");
+    print("For update Client's project press: 6");
     print("For exit press: 0");
     option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
@@ -30,6 +31,8 @@ adminBlock() {
       updateClient();
     } else if (option == 5) {
       displayClientProject();
+    } else if (option == 6) {
+      updateClientProject();
     } else if (option == 0) {
       false;
       break;
@@ -81,7 +84,8 @@ addClient() {
   Map<String, dynamic> clientProjects = {
     "id": cId,
     "name": cName,
-    "project": cProject
+    "project": cProject,
+    "status": "Pending"
   };
 
   clients.add(client);
@@ -167,6 +171,7 @@ displayClientProject() {
           print("Client id: ${clientsProjects[i]["id"]}");
           print("Client name: ${clientsProjects[i]["name"]}");
           print("Client project: ${clientsProjects[i]["project"]}");
+          print("Client project: ${clientsProjects[i]["status"]}");
           break;
         }
       }
@@ -179,6 +184,7 @@ displayClientProject() {
         print("Client id: ${clientsProjects[i]["id"]}");
         print("Client name: ${clientsProjects[i]["name"]}");
         print("Client project: ${clientsProjects[i]["project"]}");
+        print("Client project: ${clientsProjects[i]["status"]}");
         print("");
       }
     } else if (option == 0) {
@@ -283,6 +289,72 @@ updateClient() {
               break;
             }
             if (id != clients[i]["id"]) {
+              print("$id does not exist");
+              break;
+            }
+          }
+        } else {
+          print("Invalid input");
+        }
+      } else {
+        false;
+        break;
+      }
+    }
+  }
+}
+
+//========update client's project=========
+
+updateClientProject() {
+  print("");
+  print("   !========= Updatinging Client's prject ==========!");
+  print("Displaying data before update!");
+  displayClientProject();
+  while (true) {
+    if (clientsProjects.isEmpty) {
+      print("Can't update empty list");
+      break;
+    } else {
+      print("");
+      print("Do you want to update client project ? (yes/no)");
+      String option = stdin.readLineSync()!;
+      if (option == "yes" || option == "Yes") {
+        print("Edit project or status");
+        print("For project: 1");
+        print("For status: 2");
+        int options = int.parse(stdin.readLineSync()!);
+        if (options == 1) {
+          print("/Editing project/");
+          stdout.write("Enter Client id: ");
+          int id = int.parse(stdin.readLineSync()!);
+          for (var i = 0; i < clientsProjects.length; i++) {
+            if (id == clientsProjects[i]["id"]) {
+              stdout.write("Enter update project: ");
+              String project = stdin.readLineSync()!;
+              clientsProjects[i]["prject"] = project;
+              print("project updated Successfully!");
+              break;
+            }
+            if (id != clientsProjects[i]["id"]) {
+              print("$id does not exist");
+              break;
+            }
+          }
+        } else if (options == 2) {
+          print("/Editing status/");
+          print("");
+          stdout.write("Enter Client id: ");
+          int id = int.parse(stdin.readLineSync()!);
+          for (var i = 0; i < clientsProjects.length; i++) {
+            if (id == clientsProjects[i]["id"]) {
+              stdout.write("Update status: ");
+              String status = stdin.readLineSync()!;
+              clientsProjects[i]["status"] = status;
+              print("status updated Successfully!");
+              break;
+            }
+            if (id != clientsProjects[i]["id"]) {
               print("$id does not exist");
               break;
             }
