@@ -36,6 +36,9 @@ adminBlock() {
     } else if (option == 0) {
       false;
       break;
+    } else {
+      print("");
+      print("Invalid Input");
     }
   }
   print("");
@@ -415,6 +418,8 @@ void main() {
     } else if (option == 0) {
       again = false;
       break;
+    } else {
+      print("Invalid Input");
     }
   }
 }
