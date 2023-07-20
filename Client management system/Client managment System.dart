@@ -171,7 +171,7 @@ displayClientProject() {
           print("Client id: ${clientsProjects[i]["id"]}");
           print("Client name: ${clientsProjects[i]["name"]}");
           print("Client project: ${clientsProjects[i]["project"]}");
-          print("Client project: ${clientsProjects[i]["status"]}");
+          print("Client project status: ${clientsProjects[i]["status"]}");
           break;
         }
       }
@@ -184,7 +184,7 @@ displayClientProject() {
         print("Client id: ${clientsProjects[i]["id"]}");
         print("Client name: ${clientsProjects[i]["name"]}");
         print("Client project: ${clientsProjects[i]["project"]}");
-        print("Client project: ${clientsProjects[i]["status"]}");
+        print("Client project status: ${clientsProjects[i]["status"]}");
         print("");
       }
     } else if (option == 0) {
@@ -332,7 +332,7 @@ updateClientProject() {
             if (id == clientsProjects[i]["id"]) {
               stdout.write("Enter update project: ");
               String project = stdin.readLineSync()!;
-              clientsProjects[i]["prject"] = project;
+              clientsProjects[i]["project"] = project;
               print("project updated Successfully!");
               break;
             }
