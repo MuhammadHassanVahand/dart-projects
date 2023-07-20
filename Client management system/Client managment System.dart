@@ -5,7 +5,9 @@ List<Map<String, dynamic>> adminLogin = [
   {"email": "muhammadzaeem@gmail.com", "password": "1234"}
 ];
 List<Map<String, dynamic>> clients = [];
-// ===========Admin Section===========
+List<Map<String, dynamic>> clientsProjects = [];
+
+// =========== Admin Section ===========
 adminBlock() {
   int option;
   while (true) {
@@ -15,6 +17,7 @@ adminBlock() {
     print("For display client press: 2");
     print("For remove client press: 3");
     print("For update Client press: 4");
+    print("For display Client's project press: 5");
     print("For exit press: 0");
     option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
@@ -25,6 +28,8 @@ adminBlock() {
       removeClient();
     } else if (option == 4) {
       updateClient();
+    } else if (option == 5) {
+      displayClientProject();
     } else if (option == 0) {
       false;
       break;
@@ -33,6 +38,7 @@ adminBlock() {
   print("");
 }
 
+//========Add Client==========
 addClient() {
   print("");
   print("   !========= Adding Client ==========!");
@@ -62,6 +68,9 @@ addClient() {
   stdout.write("Enter client phone number: ");
   int cNumber = int.parse(stdin.readLineSync()!);
 
+  stdout.write("Enter client's project: ");
+  String cProject = stdin.readLineSync()!;
+
   Map<String, dynamic> client = {
     "id": cId,
     "name": cName,
@@ -69,18 +78,50 @@ addClient() {
     "number": cNumber
   };
 
+  Map<String, dynamic> clientProjects = {
+    "id": cId,
+    "name": cName,
+    "project": cProject
+  };
+
   clients.add(client);
+  clientsProjects.add(clientProjects);
   print("Client added Successfully");
   print("");
 }
 
+//=======display client=========
 displayClient() {
   while (true) {
     print("");
     print("   !========= Displaying Client/s ==========!");
     if (clients.isEmpty) {
       print("No client found");
-    } else {
+    }
+    print("Display only one Client press: 1");
+    print("Display all Clients press: 2");
+    int option = int.parse(stdin.readLineSync()!);
+    if (option == 1) {
+      print("");
+      bool idExist = false;
+      stdout.write("Enter client id: ");
+      int id = int.parse(stdin.readLineSync()!);
+      for (var i = 0; i < clientsProjects.length; i++) {
+        print("");
+        if (id == clients[i]["id"]) {
+          idExist = true;
+          print("Client id: ${clients[i]["id"]}");
+          print("Client name: ${clients[i]["name"]}");
+          print("Client email: ${clients[i]["email"]}");
+          print("Client number: ${clients[i]["number"]}");
+          break;
+        }
+      }
+      if (!idExist) {
+        print("Invalid id or this id does not exist ");
+      }
+    }
+    if (option == 2) {
       for (var i = 0; i < clients.length; i++) {
         print("Client id: ${clients[i]["id"]}");
         print("Client name: ${clients[i]["name"]}");
@@ -98,32 +139,97 @@ displayClient() {
   }
 }
 
+//========display client project=========
+
+displayClientProject() {
+  while (true) {
+    print("");
+    print("   !========= Displaying Client's project ==========!");
+    if (clientsProjects.isEmpty) {
+      print("No client found");
+    }
+    print("Display only one Client' project press: 1");
+    print("Display all Client's projetcs press: 2");
+    int option = int.parse(stdin.readLineSync()!);
+    if (option == 1) {
+      bool idExist = false;
+      print("");
+      stdout.write("Enter client id: ");
+      int id = int.parse(stdin.readLineSync()!);
+      for (var i = 0; i < clientsProjects.length; i++) {
+        print("");
+        if (id == clientsProjects[i]["id"]) {
+          idExist = true;
+          print("Client id: ${clientsProjects[i]["id"]}");
+          print("Client name: ${clientsProjects[i]["name"]}");
+          print("Client project: ${clientsProjects[i]["project"]}");
+          break;
+        }
+      }
+      if (!idExist) {
+        print("Invalid id or this id does not exist ");
+      }
+    }
+    if (option == 2) {
+      for (var i = 0; i < clientsProjects.length; i++) {
+        print("Client id: ${clientsProjects[i]["id"]}");
+        print("Client name: ${clientsProjects[i]["name"]}");
+        print("Client project: ${clientsProjects[i]["project"]}");
+        print("");
+      }
+    }
+    print("0 for Exit");
+    int exit = int.parse(stdin.readLineSync()!);
+    if (exit == 0) {
+      false;
+      break;
+    }
+  }
+}
+
+//=========remove client===========
+
 removeClient() {
   print("");
   print("  !========== Removing Client ==========!");
+  print("");
   if (clients.isEmpty) {
     print("No Client found to remove");
   } else {
     print("Remove all or only 1 ?");
+    print("");
     stdout.write("1 for Remove all or 2 for only one: ");
     int option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
       clients.clear();
+      clientsProjects.clear();
       print("All clients remove successfully");
     } else {
       stdout.write("Enter client id, Who you want to remove: ");
-      String id = stdin.readLineSync()!;
+      int id = int.parse(stdin.readLineSync()!);
+
+      bool idExist = false;
+
       for (var i = 0; i < clients.length; i++) {
         if (id == clients[i]["id"]) {
+          idExist = true;
           clients.removeWhere((value) => value["id"] == id);
-          print("Client remove successfully");
-        } else {
-          print("$id: id Does not exist!");
+          for (var i = 0; i < clientsProjects.length; i++) {
+            clientsProjects.removeWhere((value) => value["id"] == id);
+          }
+          print("");
+          print("Client and client's project remove successfully");
         }
+      }
+      if (!idExist) {
+        print("");
+        print("$id: id Does not exist!");
       }
     }
   }
 }
+
+//========update client=========
 
 updateClient() {
   print("");
