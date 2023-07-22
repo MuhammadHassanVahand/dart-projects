@@ -789,36 +789,40 @@ void main() {
       }
     }
     if (option == 2) {
-      print("");
-      print("Login As Employee");
+      if (employeeLogin.isEmpty) {
+        print("\nNo employee found!\n");
+      } else {
+        print("");
+        print("Login As Employee");
 
-      print("");
-      stdout.write("Enter your email: ");
-      String email = stdin.readLineSync()!;
-      stdout.write("Enter your password: ");
-      String password = stdin.readLineSync()!;
+        print("");
+        stdout.write("Enter your email: ");
+        String email = stdin.readLineSync()!;
+        stdout.write("Enter your password: ");
+        String password = stdin.readLineSync()!;
 
-      bool logginSuccessful = false;
+        bool logginSuccessful = false;
 
-      for (var i = 0; i < employeeLogin.length; i++) {
-        if (email == employeeLogin[i]["email"] &&
-            password == employeeLogin[i]["password"]) {
-          logginSuccessful = true;
-          print("");
-          print("Login Successful!");
-          print("");
-          print("1 for Employee Section");
-          print("0 for exit");
-          options = int.parse(stdin.readLineSync()!);
-          if (options == 1) {
-            employeeAccess();
-          } else if (options == 0) {
-            break;
+        for (var i = 0; i < employeeLogin.length; i++) {
+          if (email == employeeLogin[i]["email"] &&
+              password == employeeLogin[i]["password"]) {
+            logginSuccessful = true;
+            print("");
+            print("Login Successful!");
+            print("");
+            print("1 for Employee Section");
+            print("0 for exit");
+            options = int.parse(stdin.readLineSync()!);
+            if (options == 1) {
+              employeeAccess();
+            } else if (options == 0) {
+              break;
+            }
           }
         }
-      }
-      if (!logginSuccessful) {
-        print("Incorrect Email or password! Try Again");
+        if (!logginSuccessful) {
+          print("Incorrect Email or password! Try Again");
+        }
       }
     } else if (option == 0) {
       again = false;
