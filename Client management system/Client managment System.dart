@@ -14,7 +14,7 @@ adminBlock() {
   int option;
   while (true) {
     print("");
-    print(" !=============== Admin Block =================!");
+    print(" !=============== Admin Block =================! \n");
     print("For emplyee Section press 1 \n");
     print("For client Section press: 2 \n");
     print("For exit press: 0");
@@ -33,13 +33,13 @@ adminBlock() {
   }
 }
 
-//============================ Client Section ===========================
+//============================ Client Section =================================
 
 clientSection() {
   int option;
   while (true) {
     print("");
-    print(" !=============== Client Section  =================!");
+    print(" !=============== Client Section  =================! \n");
     print("For add client press: 1 \n");
     print("For display client press: 2 \n");
     print("For remove client press: 3 \n");
@@ -73,7 +73,7 @@ clientSection() {
 //========Add Client==========
 addClient() {
   print("");
-  print("   !========= Adding Client ==========!");
+  print("   !========= Adding Client ==========! \n");
   int? cId;
   bool isUnique = false;
   while (!isUnique) {
@@ -119,6 +119,7 @@ addClient() {
 
   clients.add(client);
   clientsProjects.add(clientProjects);
+  print("");
   print("Client added Successfully");
   print("");
 }
@@ -126,7 +127,7 @@ addClient() {
 //=======display client=========
 displayClient() {
   print("");
-  print("   !========= Displaying Client/s ==========!");
+  print("   !========= Displaying Client/s ==========! \n");
   while (true) {
     if (clients.isEmpty) {
       print("No client found");
@@ -158,16 +159,18 @@ displayClient() {
       }
     } else if (option == 2) {
       for (var i = 0; i < clients.length; i++) {
+        print("");
         print("Client id: ${clients[i]["id"]}");
         print("Client name: ${clients[i]["name"]}");
         print("Client email: ${clients[i]["email"]}");
         print("Client number: ${clients[i]["number"]}");
-        print("");
       }
     } else if (option == 0) {
+      print("");
       print("Exiting....");
       break;
     } else {
+      print("");
       print("Invalid input");
     }
   }
@@ -177,7 +180,7 @@ displayClient() {
 
 displayClientProject() {
   print("");
-  print("   !========= Displaying Client's project ==========!");
+  print("   !========= Displaying Client's project ==========! \n");
   while (true) {
     if (clientsProjects.isEmpty) {
       print("No client found");
@@ -210,16 +213,17 @@ displayClientProject() {
     } else if (option == 2) {
       print("");
       for (var i = 0; i < clientsProjects.length; i++) {
+        print("");
         print("Client id: ${clientsProjects[i]["id"]}");
         print("Client name: ${clientsProjects[i]["name"]}");
         print("Client project: ${clientsProjects[i]["project"]}");
         print("Client project status: ${clientsProjects[i]["status"]}");
-        print("");
       }
     } else if (option == 0) {
       false;
       break;
     } else {
+      print("");
       print("Invalid input");
     }
   }
@@ -241,9 +245,10 @@ removeClient() {
     if (option == 1) {
       clients.clear();
       clientsProjects.clear();
+      print("");
       print("All clients remove successfully");
     } else {
-      stdout.write("Enter client id, Who you want to remove: ");
+      stdout.write("Enter client id, who you want to remove: ");
       int id = int.parse(stdin.readLineSync()!);
 
       bool idExist = false;
@@ -271,8 +276,8 @@ removeClient() {
 
 updateClient() {
   print("");
-  print("   !========= Updatinging Client ==========!");
-  print("Displaying data before update!");
+  print("   !========= Updatinging Client ==========! \n");
+  print("Displaying data before update! \n");
   displayClient();
   while (true) {
     if (clients.isEmpty) {
@@ -280,7 +285,7 @@ updateClient() {
       break;
     } else {
       print("");
-      print("Do you want to update client ? (yes/no)");
+      print("Do you want to update client ? (yes/no) \n");
       String option = stdin.readLineSync()!;
       if (option == "yes" || option == "Yes") {
         print("Edit Email or phone");
@@ -288,7 +293,7 @@ updateClient() {
         print("For number: 2");
         int options = int.parse(stdin.readLineSync()!);
         if (options == 1) {
-          print("/Editing Email/");
+          print("/Editing Email/ \n");
           stdout.write("Enter Client id: ");
           int id = int.parse(stdin.readLineSync()!);
           for (var i = 0; i < clients.length; i++) {
@@ -296,16 +301,18 @@ updateClient() {
               stdout.write("Enter New email: ");
               String email = stdin.readLineSync()!;
               clients[i]["email"] = email;
+              print("");
               print("Email updated Successfully!");
               break;
             }
             if (id != clients[i]["id"]) {
+              print("");
               print("$id does not exist");
               break;
             }
           }
         } else if (options == 2) {
-          print("/Editing Number/");
+          print("/Editing Number/ \n");
           print("");
           stdout.write("Enter Client id: ");
           int id = int.parse(stdin.readLineSync()!);
@@ -314,10 +321,12 @@ updateClient() {
               stdout.write("Enter New number: ");
               int number = int.parse(stdin.readLineSync()!);
               clients[i]["number"] = number;
+              print("");
               print("Number updated Successfully!");
               break;
             }
             if (id != clients[i]["id"]) {
+              print("");
               print("$id does not exist");
               break;
             }
@@ -713,15 +722,38 @@ displayEmployeeLogin() {
   }
 }
 
+//===================== For Employee ========================
+
+employeeAccess() {
+  print("============== Employee Access ============= \n");
+  while (true) {
+    print("1 for client data");
+    print("2 for client's project");
+    print("0 for Exit");
+    int option = int.parse(stdin.readLineSync()!);
+    if (option == 1) {
+      displayClient();
+    } else if (option == 2) {
+      displayClientProject();
+    } else if (option == 0) {
+      print("Exiting....");
+      break;
+    } else {
+      print("Invalid option");
+    }
+  }
+}
+
 void main() {
   int options;
   bool again = true;
   while (again) {
     print(
-        "%=================== Welcom 2 Client Management System =====================%");
+        "%=================== Welcom 2 Client Management System =====================% \n");
     print("");
     print("1 for admin login");
-    print("0 for exit");
+    print("2 for employee login");
+    print("0 for exit \n");
     int option = int.parse(stdin.readLineSync()!);
     if (option == 1) {
       print("");
@@ -747,6 +779,39 @@ void main() {
           options = int.parse(stdin.readLineSync()!);
           if (options == 1) {
             adminBlock();
+          } else if (options == 0) {
+            break;
+          }
+        }
+      }
+      if (!logginSuccessful) {
+        print("Incorrect Email or password! Try Again");
+      }
+    }
+    if (option == 2) {
+      print("");
+      print("Login As Employee");
+
+      print("");
+      stdout.write("Enter your email: ");
+      String email = stdin.readLineSync()!;
+      stdout.write("Enter your password: ");
+      String password = stdin.readLineSync()!;
+
+      bool logginSuccessful = false;
+
+      for (var i = 0; i < employeeLogin.length; i++) {
+        if (email == employeeLogin[i]["email"] &&
+            password == employeeLogin[i]["password"]) {
+          logginSuccessful = true;
+          print("");
+          print("Login Successful!");
+          print("");
+          print("1 for Employee Section");
+          print("0 for exit");
+          options = int.parse(stdin.readLineSync()!);
+          if (options == 1) {
+            employeeAccess();
           } else if (options == 0) {
             break;
           }
