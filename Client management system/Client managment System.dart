@@ -175,29 +175,13 @@ displayClient() {
       print("No client found");
       break;
     }
-    print("");
-    print("Display only one Client press: 1");
-    print("Display all Clients press: 2");
-    print("For exit press: 0");
 
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid input");
-      continue;
-    }
-
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.\n");
-      continue;
-    }
-
-    int option = int.parse(input);
-
-    if (option == 1) {
+    int? option;
+    while (true) {
       print("");
-      stdout.write("Enter client id: ");
-
+      print("Display only one Client press: 1");
+      print("Display all Clients press: 2");
+      print("For exit press: 0");
       String? input = stdin.readLineSync();
 
       if (input == null || input.isEmpty) {
@@ -208,9 +192,33 @@ displayClient() {
       if (!RegExp(r'^\d+$').hasMatch(input)) {
         print("\nString input Not allowed! Use only numbers.\n");
         continue;
+      } else {
+        option = int.parse(input);
+        break;
       }
+    }
 
-      int id = int.parse(input);
+    if (option == 1) {
+      print("");
+
+      int? id;
+      while (true) {
+        stdout.write("Enter client id: ");
+        String? input = stdin.readLineSync();
+
+        if (input == null || input.isEmpty) {
+          print("Invalid input");
+          continue;
+        }
+
+        if (!RegExp(r'^\d+$').hasMatch(input)) {
+          print("\nString input Not allowed! Use only numbers.\n");
+          continue;
+        } else {
+          id = int.parse(input);
+          break;
+        }
+      }
 
       bool idExist = clients.any((client) => client["id"] == id);
 
@@ -253,28 +261,13 @@ displayClientProject() {
       print("No client found");
       break;
     }
-    print("");
-    print("Display only one Client' project press: 1");
-    print("Display all Client's projetcs press: 2");
-    print("for exit press: 0");
 
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid input");
-      continue;
-    }
-
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.\n");
-      continue;
-    }
-
-    int option = int.parse(input);
-    if (option == 1) {
+    int? option;
+    while (true) {
       print("");
-      stdout.write("Enter client id: ");
-
+      print("Display only one Client' project press: 1");
+      print("Display all Client's projetcs press: 2");
+      print("for exit press: 0");
       String? input = stdin.readLineSync();
 
       if (input == null || input.isEmpty) {
@@ -285,9 +278,34 @@ displayClientProject() {
       if (!RegExp(r'^\d+$').hasMatch(input)) {
         print("\nString input Not allowed! Use only numbers.\n");
         continue;
+      } else {
+        option = int.parse(input);
+        break;
+      }
+    }
+
+    if (option == 1) {
+      print("");
+
+      int? id;
+      while (true) {
+        stdout.write("Enter client id: ");
+        String? input = stdin.readLineSync();
+
+        if (input == null || input.isEmpty) {
+          print("Invalid input");
+          continue;
+        }
+
+        if (!RegExp(r'^\d+$').hasMatch(input)) {
+          print("\nString input Not allowed! Use only numbers.\n");
+          continue;
+        } else {
+          id = int.parse(input);
+          break;
+        }
       }
 
-      int id = int.parse(input);
       bool idExist = clients.any((client) => client["id"] == id);
 
       print("");
@@ -329,33 +347,13 @@ removeClient() {
     print("");
     if (clients.isEmpty) {
       print("No Client found to remove");
+      break;
     } else {
       print("Remove all or only 1 ?");
       print("");
-      stdout.write("1 for Remove all or 2 for only one: ");
-
-      String? input = stdin.readLineSync();
-
-      if (input == null || input.isEmpty) {
-        print("Invalid input");
-        continue;
-      }
-
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.\n");
-        continue;
-      }
-
-      int option = int.parse(input);
-      if (option == 1) {
-        clients.clear();
-        clientsProjects.clear();
-        print("");
-        print("All clients remove successfully");
-        break;
-      } else {
-        stdout.write("Enter client id, who you want to remove: ");
-
+      int? option;
+      while (true) {
+        stdout.write("1 for Remove all or 2 for only one: ");
         String? input = stdin.readLineSync();
 
         if (input == null || input.isEmpty) {
@@ -366,9 +364,38 @@ removeClient() {
         if (!RegExp(r'^\d+$').hasMatch(input)) {
           print("\nString input Not allowed! Use only numbers.\n");
           continue;
+        } else {
+          option = int.parse(input);
+          break;
         }
+      }
 
-        int id = int.parse(input);
+      if (option == 1) {
+        clients.clear();
+        clientsProjects.clear();
+        print("");
+        print("All clients remove successfully");
+        break;
+      }
+      if (option == 2) {
+        int? id;
+        while (true) {
+          stdout.write("Enter client id, who you want to remove: ");
+          String? input = stdin.readLineSync();
+
+          if (input == null || input.isEmpty) {
+            print("Invalid input");
+            continue;
+          }
+
+          if (!RegExp(r'^\d+$').hasMatch(input)) {
+            print("\nString input Not allowed! Use only numbers.\n");
+            continue;
+          } else {
+            id = int.parse(input);
+            break;
+          }
+        }
 
         bool idExist = clients.any((client) => client["id"] == id);
 
@@ -384,6 +411,9 @@ removeClient() {
           print("");
           print("$id: id Does not exist!");
         }
+      } else {
+        print("Invalid Input");
+        continue;
       }
     }
   }
@@ -405,26 +435,11 @@ updateClient() {
       print("Do you want to update client ? (yes/no) \n");
       String option = stdin.readLineSync()!;
       if (option == "yes" || option == "Yes") {
-        print("Edit Email or phone");
-        print("For email: 1");
-        print("For number: 2");
-
-        String? input = stdin.readLineSync();
-
-        if (input == null || input.isEmpty) {
-          print("Invalid input");
-          continue;
-        }
-
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.\n");
-          continue;
-        }
-
-        int options = int.parse(input);
-        if (options == 1) {
-          print("/Editing Email/ \n");
-          stdout.write("Enter Client id: ");
+        int? options;
+        while (true) {
+          print("Edit Email or phone");
+          print("For email: 1");
+          print("For number: 2");
 
           String? input = stdin.readLineSync();
 
@@ -436,9 +451,33 @@ updateClient() {
           if (!RegExp(r'^\d+$').hasMatch(input)) {
             print("\nString input Not allowed! Use only numbers.\n");
             continue;
+          } else {
+            options = int.parse(input);
+            break;
+          }
+        }
+
+        if (options == 1) {
+          print("/Editing Email/ \n");
+          int? id;
+          while (true) {
+            stdout.write("Enter Client id: ");
+            String? input = stdin.readLineSync();
+
+            if (input == null || input.isEmpty) {
+              print("Invalid input");
+              continue;
+            }
+
+            if (!RegExp(r'^\d+$').hasMatch(input)) {
+              print("\nString input Not allowed! Use only numbers.\n");
+              continue;
+            } else {
+              id = int.parse(input);
+              break;
+            }
           }
 
-          int id = int.parse(input);
           bool idExist = clients.any((client) => client["id"] == id);
 
           if (idExist) {
@@ -457,27 +496,9 @@ updateClient() {
         } else if (options == 2) {
           print("/Editing Number/ \n");
           print("");
-          stdout.write("Enter Client id: ");
-
-          String? input = stdin.readLineSync();
-
-          if (input == null || input.isEmpty) {
-            print("Invalid input");
-            continue;
-          }
-
-          if (!RegExp(r'^\d+$').hasMatch(input)) {
-            print("\nString input Not allowed! Use only numbers.\n");
-            continue;
-          }
-
-          int id = int.parse(input);
-
-          bool idExist = clients.any((client) => client["id"] == id);
-
-          if (idExist) {
-            stdout.write("Enter New number: ");
-
+          int? id;
+          while (true) {
+            stdout.write("Enter Client id: ");
             String? input = stdin.readLineSync();
 
             if (input == null || input.isEmpty) {
@@ -488,9 +509,34 @@ updateClient() {
             if (!RegExp(r'^\d+$').hasMatch(input)) {
               print("\nString input Not allowed! Use only numbers.\n");
               continue;
+            } else {
+              id = int.parse(input);
+              break;
+            }
+          }
+
+          bool idExist = clients.any((client) => client["id"] == id);
+
+          if (idExist) {
+            int? number;
+            while (true) {
+              stdout.write("Enter New number: ");
+              String? input = stdin.readLineSync();
+
+              if (input == null || input.isEmpty) {
+                print("Invalid input");
+                continue;
+              }
+
+              if (!RegExp(r'^\d+$').hasMatch(input)) {
+                print("\nString input Not allowed! Use only numbers.\n");
+                continue;
+              } else {
+                number = int.parse(input);
+                break;
+              }
             }
 
-            int number = int.parse(input);
             final client = clients.firstWhere((client) => client["id"] == id);
             client["number"] = number;
 
@@ -531,44 +577,97 @@ updateClientProject() {
       print("Do you want to update client project ? (yes/no)");
       String option = stdin.readLineSync()!;
       if (option == "yes" || option == "Yes") {
-        print("Edit project or status");
-        print("For project: 1");
-        print("For status: 2");
-        int options = int.parse(stdin.readLineSync()!);
+        int? options;
+        while (true) {
+          print("Edit project or status");
+          print("For project: 1");
+          print("For status: 2");
+
+          String? input = stdin.readLineSync();
+
+          if (input == null || input.isEmpty) {
+            print("Invalid input");
+            continue;
+          }
+
+          if (!RegExp(r'^\d+$').hasMatch(input)) {
+            print("\nString input Not allowed! Use only numbers.\n");
+            continue;
+          } else {
+            options = int.parse(input);
+            break;
+          }
+        }
+
         if (options == 1) {
           print("/Editing project/");
-          stdout.write("Enter Client id: ");
-          int id = int.parse(stdin.readLineSync()!);
-          for (var i = 0; i < clientsProjects.length; i++) {
-            if (id == clientsProjects[i]["id"]) {
-              stdout.write("Enter update project: ");
-              String project = stdin.readLineSync()!;
-              clientsProjects[i]["project"] = project;
-              print("project updated Successfully!");
+
+          int? id;
+          while (true) {
+            stdout.write("Enter Client id: ");
+
+            String? input = stdin.readLineSync();
+
+            if (input == null || input.isEmpty) {
+              print("Invalid input");
+              continue;
+            }
+
+            if (!RegExp(r'^\d+$').hasMatch(input)) {
+              print("\nString input Not allowed! Use only numbers.\n");
+              continue;
+            } else {
+              id = int.parse(input);
               break;
             }
-            if (id != clientsProjects[i]["id"]) {
-              print("$id does not exist");
-              break;
-            }
+          }
+          bool idExist =
+              clientsProjects.any((clientProject) => clientProject["id"] == id);
+          if (idExist) {
+            stdout.write("Enter update project: ");
+            String project = stdin.readLineSync()!;
+            final clientProject = clientsProjects
+                .firstWhere((clientProject) => clientProject["id"] == id);
+            clientProject["project"] = project;
+            print("project updated Successfully!");
+            break;
+          } else {
+            print("$id does not exist");
+            break;
           }
         } else if (options == 2) {
           print("/Editing status/");
           print("");
-          stdout.write("Enter Client id: ");
-          int id = int.parse(stdin.readLineSync()!);
-          for (var i = 0; i < clientsProjects.length; i++) {
-            if (id == clientsProjects[i]["id"]) {
-              stdout.write("Update status: ");
-              String status = stdin.readLineSync()!;
-              clientsProjects[i]["status"] = status;
-              print("status updated Successfully!");
+          int? id;
+          while (true) {
+            stdout.write("Enter Client id: ");
+            String? input = stdin.readLineSync();
+
+            if (input == null || input.isEmpty) {
+              print("Invalid Input");
+              continue;
+            }
+            if (!RegExp(r'^\d+$').hasMatch(input)) {
+              print("\nString input Not allowed! Use only numbers.\n");
+              continue;
+            } else {
+              id = int.parse(stdin.readLineSync()!);
               break;
             }
-            if (id != clientsProjects[i]["id"]) {
-              print("$id does not exist");
-              break;
-            }
+          }
+          bool idExist =
+              clientsProjects.any((clientProject) => clientProject["id"] == id);
+          if (idExist) {
+            stdout.write("Update status: ");
+            String status = stdin.readLineSync()!;
+            final clientProject = clientsProjects
+                .firstWhere((clientProject) => clientProject["id"] == id);
+            clientProject["status"] = status;
+            print("status updated Successfully!");
+            break;
+          } else {
+            print("$id does not exist");
+            break;
           }
         } else {
           print("Invalid input");
