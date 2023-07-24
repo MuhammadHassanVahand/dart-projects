@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'Client managment System.dart';
+import 'String error.dart';
 //============================ Client Section =================================
 
 clientSection() {
@@ -7,27 +8,16 @@ clientSection() {
   while (true) {
     print("");
     print(" !=============== Client Section  =================! \n");
-    print("For add client press: 1 \n");
-    print("For display client press: 2 \n");
-    print("For remove client press: 3 \n");
-    print("For update Client press: 4 \n");
-    print("For display Client's project press: 5 \n");
-    print("For update Client's project press: 6 \n");
-    print("For exit press: 0");
 
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid input");
-      continue;
-    }
-
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.");
-      continue;
-    }
-
-    option = int.parse(input);
+    option = readValidNumberInput("""
+    For add client press: 1
+    For display client press: 2
+    For remove client press: 3
+    For update Client press: 4
+    For display Client's project press: 5
+    For update Client's project press: 6
+    For exit press: 0 
+    """);
     if (option == 1) {
       addClient();
     } else if (option == 2) {
@@ -58,21 +48,7 @@ addClient() {
   int cNumber;
   bool isUnique = false;
   while (!isUnique) {
-    stdout.write("Enter client id! should be unique in numbers: ");
-
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid input");
-      continue;
-    }
-
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.\n");
-      continue;
-    }
-
-    cId = int.parse(input);
+    cId = readValidNumberInput("Enter client id! should be unique in numbers:");
 
     isUnique = true;
 
@@ -91,23 +67,7 @@ addClient() {
   stdout.write("Enter client email: ");
   String cEmail = stdin.readLineSync()!;
 
-  while (true) {
-    stdout.write("Enter client phone number: ");
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid input");
-      continue;
-    }
-
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.\n");
-      continue;
-    } else {
-      cNumber = int.parse(input);
-      break;
-    }
-  }
+  cNumber = readValidNumberInput("Enter phone number:");
 
   stdout.write("Enter client's project: ");
   String cProject = stdin.readLineSync()!;
@@ -143,49 +103,18 @@ displayClient() {
       break;
     }
 
-    int? option;
-    while (true) {
-      print("");
-      print("Display only one Client press: 1");
-      print("Display all Clients press: 2");
-      print("For exit press: 0");
-      String? input = stdin.readLineSync();
-
-      if (input == null || input.isEmpty) {
-        print("Invalid input");
-        continue;
-      }
-
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.\n");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
+    int option = readValidNumberInput(""" 
+    Display only one Client press: 1
+    Display all Clients press: 2
+    For exit press: 0
+    """);
 
     if (option == 1) {
       print("");
 
       int? id;
-      while (true) {
-        stdout.write("Enter client id: ");
-        String? input = stdin.readLineSync();
 
-        if (input == null || input.isEmpty) {
-          print("Invalid input");
-          continue;
-        }
-
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.\n");
-          continue;
-        } else {
-          id = int.parse(input);
-          break;
-        }
-      }
+      id = readValidNumberInput("Enter client id:");
 
       bool idExist = clients.any((client) => client["id"] == id);
 
@@ -230,48 +159,19 @@ displayClientProject() {
     }
 
     int? option;
-    while (true) {
-      print("");
-      print("Display only one Client' project press: 1");
-      print("Display all Client's projetcs press: 2");
-      print("for exit press: 0");
-      String? input = stdin.readLineSync();
 
-      if (input == null || input.isEmpty) {
-        print("Invalid input");
-        continue;
-      }
-
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.\n");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
+    option = readValidNumberInput("""
+      Display only one Client' project press: 1
+      Display all Client's projetcs press: 2
+      for exit press: 0
+      """);
 
     if (option == 1) {
       print("");
 
       int? id;
-      while (true) {
-        stdout.write("Enter client id: ");
-        String? input = stdin.readLineSync();
 
-        if (input == null || input.isEmpty) {
-          print("Invalid input");
-          continue;
-        }
-
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.\n");
-          continue;
-        } else {
-          id = int.parse(input);
-          break;
-        }
-      }
+      id = readValidNumberInput("Enter client id:");
 
       bool idExist = clients.any((client) => client["id"] == id);
 
@@ -319,23 +219,8 @@ removeClient() {
       print("Remove all or only 1 ?");
       print("");
       int? option;
-      while (true) {
-        stdout.write("1 for Remove all or 2 for only one: ");
-        String? input = stdin.readLineSync();
 
-        if (input == null || input.isEmpty) {
-          print("Invalid input");
-          continue;
-        }
-
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.\n");
-          continue;
-        } else {
-          option = int.parse(input);
-          break;
-        }
-      }
+      option = readValidNumberInput("1 for Remove all or 2 for only one:");
 
       if (option == 1) {
         clients.clear();
@@ -346,23 +231,8 @@ removeClient() {
       }
       if (option == 2) {
         int? id;
-        while (true) {
-          stdout.write("Enter client id, who you want to remove: ");
-          String? input = stdin.readLineSync();
 
-          if (input == null || input.isEmpty) {
-            print("Invalid input");
-            continue;
-          }
-
-          if (!RegExp(r'^\d+$').hasMatch(input)) {
-            print("\nString input Not allowed! Use only numbers.\n");
-            continue;
-          } else {
-            id = int.parse(input);
-            break;
-          }
-        }
+        id = readValidNumberInput("Enter client id, who you want to remove:");
 
         bool idExist = clients.any((client) => client["id"] == id);
 
@@ -403,47 +273,16 @@ updateClient() {
       String option = stdin.readLineSync()!;
       if (option == "yes" || option == "Yes") {
         int? options;
-        while (true) {
-          print("Edit Email or phone");
-          print("For email: 1");
-          print("For number: 2");
-
-          String? input = stdin.readLineSync();
-
-          if (input == null || input.isEmpty) {
-            print("Invalid input");
-            continue;
-          }
-
-          if (!RegExp(r'^\d+$').hasMatch(input)) {
-            print("\nString input Not allowed! Use only numbers.\n");
-            continue;
-          } else {
-            options = int.parse(input);
-            break;
-          }
-        }
+        options = readValidNumberInput("""
+        Edit Email or phone
+        For email: 1
+        For number: 2
+        """);
 
         if (options == 1) {
           print("/Editing Email/ \n");
           int? id;
-          while (true) {
-            stdout.write("Enter Client id: ");
-            String? input = stdin.readLineSync();
-
-            if (input == null || input.isEmpty) {
-              print("Invalid input");
-              continue;
-            }
-
-            if (!RegExp(r'^\d+$').hasMatch(input)) {
-              print("\nString input Not allowed! Use only numbers.\n");
-              continue;
-            } else {
-              id = int.parse(input);
-              break;
-            }
-          }
+          id = readValidNumberInput("Enter Client id:");
 
           bool idExist = clients.any((client) => client["id"] == id);
 

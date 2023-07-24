@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'Client Section.dart';
 import 'Employee Section.dart';
+import 'String error.dart';
 
 // ============================ Admin Section ===============================
 adminBlock() {

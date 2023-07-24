@@ -2,6 +2,7 @@ import 'dart:io';
 import "Client managment System.dart";
 import 'Client Section.dart';
 import 'Login Process.dart';
+import 'String error.dart';
 
 //====================== Employee Section ===================================
 

@@ -1,5 +1,6 @@
 import 'Login Process.dart';
 import 'dart:io';
+import 'String error.dart';
 
 List<Map<String, dynamic>> clients = [];
 List<Map<String, dynamic>> clientsProjects = [];
