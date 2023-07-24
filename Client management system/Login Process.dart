@@ -10,7 +10,7 @@ List<Map<String, dynamic>> adminLogin = [
 List<Map<String, dynamic>> employeeLogin = [];
 //======================= Login Process ================================
 
-//======== Admin Login Process=======
+// ======== Admin Login Process=======
 adminLoginProcess() {
   int? options;
   print("Login As Admin");
@@ -29,14 +29,30 @@ adminLoginProcess() {
       logginSuccessful = true;
       print("");
       print("Login Successful!");
-      print("");
-      print("1 for admin");
-      print("0 for exit");
-      options = int.parse(stdin.readLineSync()!);
+      while (true) {
+        print("");
+        print("1 for admin");
+        print("0 for exit");
+
+        String? input = stdin.readLineSync();
+        if (input == null || input.isEmpty) {
+          print("Invalid Input");
+          continue;
+        }
+        if (!RegExp(r'^\d+$').hasMatch(input)) {
+          print("\nString not allowed! Enter number only");
+          continue;
+        } else {
+          options = int.parse(input);
+          break;
+        }
+      }
       if (options == 1) {
         adminBlock();
       } else if (options == 0) {
         break;
+      } else {
+        print("Invalid Input!");
       }
     }
   }
@@ -70,13 +86,30 @@ employeeLoginProcess() {
         print("");
         print("Login Successful!");
         print("");
-        print("1 for Employee Section");
-        print("0 for exit");
-        options = int.parse(stdin.readLineSync()!);
+        while (true) {
+          print("");
+          print("1 for Employee Section");
+          print("0 for exit");
+
+          String? input = stdin.readLineSync();
+          if (input == null || input.isEmpty) {
+            print("Invalid Input");
+            continue;
+          }
+          if (!RegExp(r'^\d+$').hasMatch(input)) {
+            print("\nString not allowed! Enter number only");
+            continue;
+          } else {
+            options = int.parse(input);
+            break;
+          }
+        }
         if (options == 1) {
           employeeAccess();
         } else if (options == 0) {
           break;
+        } else {
+          print("Invalid Input!");
         }
       }
     }

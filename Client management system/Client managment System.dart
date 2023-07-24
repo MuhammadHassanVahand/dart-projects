@@ -7,14 +7,30 @@ List<Map<String, dynamic>> employeesDetails = [];
 
 void main() {
   bool again = true;
+  int? option;
   while (again) {
     print(
         "%=================== Welcom 2 Client Management System =====================% \n");
-    print("");
-    print("1 for admin login");
-    print("2 for employee login");
-    print("0 for exit \n");
-    int option = int.parse(stdin.readLineSync()!);
+    while (true) {
+      print("");
+      print("1 for admin login");
+      print("2 for employee login");
+      print("0 for exit \n");
+
+      String? input = stdin.readLineSync();
+      if (input == null || input.isEmpty) {
+        print("Invalid Input");
+        continue;
+      }
+      if (!RegExp(r'^\d+$').hasMatch(input)) {
+        print("\nString not allowed! Enter number only");
+        continue;
+      } else {
+        option = int.parse(input);
+        break;
+      }
+    }
+
     if (option == 1) {
       print("");
       adminLoginProcess();
