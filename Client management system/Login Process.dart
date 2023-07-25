@@ -30,24 +30,14 @@ adminLoginProcess() {
       logginSuccessful = true;
       print("");
       print("Login Successful!");
-      while (true) {
-        print("");
-        print("1 for admin");
-        print("0 for exit");
+      print("");
 
-        String? input = stdin.readLineSync();
-        if (input == null || input.isEmpty) {
-          print("Invalid Input");
-          continue;
-        }
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString not allowed! Enter number only");
-          continue;
-        } else {
-          options = int.parse(input);
-          break;
-        }
-      }
+      options = readValidNumberInput("""
+
+      1 for admin;
+      0 for exit;
+      """);
+
       if (options == 1) {
         adminBlock();
       } else if (options == 0) {
@@ -87,24 +77,12 @@ employeeLoginProcess() {
         print("");
         print("Login Successful!");
         print("");
-        while (true) {
-          print("");
-          print("1 for Employee Section");
-          print("0 for exit");
 
-          String? input = stdin.readLineSync();
-          if (input == null || input.isEmpty) {
-            print("Invalid Input");
-            continue;
-          }
-          if (!RegExp(r'^\d+$').hasMatch(input)) {
-            print("\nString not allowed! Enter number only");
-            continue;
-          } else {
-            options = int.parse(input);
-            break;
-          }
-        }
+        options = readValidNumberInput("""
+        1 for Employee Section
+        0 for exit
+        """);
+
         if (options == 1) {
           employeeAccess();
         } else if (options == 0) {

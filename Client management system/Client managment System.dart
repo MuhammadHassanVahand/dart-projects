@@ -1,5 +1,4 @@
 import 'Login Process.dart';
-import 'dart:io';
 import 'String error.dart';
 
 List<Map<String, dynamic>> clients = [];
@@ -12,25 +11,15 @@ void main() {
   while (again) {
     print(
         "%=================== Welcom 2 Client Management System =====================% \n");
-    while (true) {
-      print("");
-      print("1 for admin login");
-      print("2 for employee login");
-      print("0 for exit \n");
 
-      String? input = stdin.readLineSync();
-      if (input == null || input.isEmpty) {
-        print("Invalid Input");
-        continue;
-      }
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString not allowed! Enter number only");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
+    print("");
+
+    option = readValidNumberInput("""
+
+      1 for admin login
+      2 for employee login
+      0 for exit \n
+      """);
 
     if (option == 1) {
       print("");
