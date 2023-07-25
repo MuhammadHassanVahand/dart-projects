@@ -34,8 +34,8 @@ adminLoginProcess() {
 
       options = readValidNumberInput("""
 
-      1 for admin;
-      0 for exit;
+1 for admin;
+0 for exit;
       """);
 
       if (options == 1) {
@@ -79,8 +79,8 @@ employeeLoginProcess() {
         print("");
 
         options = readValidNumberInput("""
-        1 for Employee Section
-        0 for exit
+1 for Employee Section
+0 for exit
         """);
 
         if (options == 1) {

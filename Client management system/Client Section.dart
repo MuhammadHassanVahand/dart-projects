@@ -10,14 +10,14 @@ clientSection() {
     print(" !=============== Client Section  =================! \n");
 
     option = readValidNumberInput("""
-    For add client press: 1
-    For display client press: 2
-    For remove client press: 3
-    For update Client press: 4
-    For display Client's project press: 5
-    For update Client's project press: 6
-    For exit press: 0 
-    """);
+For add client press: 1
+For display client press: 2
+For remove client press: 3
+For update Client press: 4
+For display Client's project press: 5
+For update Client's project press: 6
+For exit press: 0 
+""");
     if (option == 1) {
       addClient();
     } else if (option == 2) {
@@ -104,10 +104,10 @@ displayClient() {
     }
 
     int option = readValidNumberInput(""" 
-    Display only one Client press: 1
-    Display all Clients press: 2
-    For exit press: 0
-    """);
+Display only one Client press: 1
+Display all Clients press: 2
+For exit press: 0
+""");
 
     if (option == 1) {
       print("");
@@ -161,10 +161,10 @@ displayClientProject() {
     int? option;
 
     option = readValidNumberInput("""
-      Display only one Client' project press: 1
-      Display all Client's projetcs press: 2
-      for exit press: 0
-      """);
+Display only one Client' project press: 1
+Display all Client's projetcs press: 2
+for exit press: 0
+""");
 
     if (option == 1) {
       print("");
@@ -274,10 +274,10 @@ updateClient() {
       if (option == "yes" || option == "Yes") {
         int? options;
         options = readValidNumberInput("""
-        Edit Email or phone
-        For email: 1
-        For number: 2
-        """);
+Edit Email or phone
+For email: 1
+For number: 2
+""");
 
         if (options == 1) {
           print("/Editing Email/ \n");
@@ -355,10 +355,10 @@ updateClientProject() {
         int? options;
 
         options = readValidNumberInput("""
-        Edit project or status
-        For project: 1
-        For status: 2 
-        """);
+Edit project or status
+For project: 1
+For status: 2 
+""");
 
         if (options == 1) {
           print("/Editing project/");

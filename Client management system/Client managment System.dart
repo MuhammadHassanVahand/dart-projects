@@ -15,11 +15,10 @@ void main() {
     print("");
 
     option = readValidNumberInput("""
-
-      1 for admin login
-      2 for employee login
-      0 for exit \n
-      """);
+1 for admin login
+2 for employee login
+0 for exit 
+""");
 
     if (option == 1) {
       print("");

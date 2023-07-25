@@ -12,28 +12,14 @@ employeeSection() {
     print("");
     print(" !=============== Employee Section =================!");
 
-    while (true) {
-      print("For add emplyee press 1 \n");
-      print("For display Employee press: 2 \n");
-      print("For remove Employee press: 3 \n");
-      print("For update Employee press: 4 \n");
-      print("For display Employee's Loggin Details press: 5 \n");
-      print("For exit press: 0");
+    option = readValidNumberInput("""
+For add emplyee press 1 
+For display Employee press: 2 
+For remove Employee press: 3 
+For update Employee press: 4 
+For display Employee's Loggin Details press: 5 
+For exit press: 0 """);
 
-      String? input = stdin.readLineSync();
-
-      if (input == null || input.isEmpty) {
-        print("Invalid Input!");
-        continue;
-      }
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
     if (option == 1) {
       addEmployee();
     } else if (option == 2) {
@@ -63,19 +49,8 @@ addEmployee() {
   int? ePhoneNumber;
   bool isUnique = false;
   while (!isUnique) {
-    stdout.write("Enter Employee id! Should be unique , in number: ");
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid Input!");
-      continue;
-    }
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.");
-      continue;
-    } else {
-      eId = int.parse(input);
-    }
+    eId = readValidNumberInput(
+        "Enter Employee id! Should be unique , in number: ");
 
     isUnique = true;
 
@@ -91,22 +66,7 @@ addEmployee() {
   stdout.write("Enter Employee name: ");
   String eName = stdin.readLineSync()!;
 
-  while (true) {
-    stdout.write("Enter Employee number: ");
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid Input!");
-      continue;
-    }
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.");
-      continue;
-    } else {
-      ePhoneNumber = int.parse(input);
-      break;
-    }
-  }
+  ePhoneNumber = readValidNumberInput("Enter Employee number: ");
 
   stdout.write("Enter Employee email: ");
   String eEmail = stdin.readLineSync()!;
@@ -144,43 +104,18 @@ displayEmployee() {
       break;
     }
     print("");
-    print("Display only one Employee press: 1");
-    print("Display all Employee press: 2");
-    print("For exit press: 0");
 
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid Input!");
-      continue;
-    }
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.");
-      continue;
-    } else {
-      option = int.parse(input);
-    }
+    option = readValidNumberInput("""
+Display only one Employee press: 1
+Display all Employee press: 2
+For exit press: 0""");
 
     if (option == 1) {
       print("");
       int? id;
 
-      while (true) {
-        stdout.write("Enter client id: ");
-        String? input = stdin.readLineSync();
+      id = readValidNumberInput("Enter client id: ");
 
-        if (input == null || input.isEmpty) {
-          print("Invalid Input!");
-          continue;
-        }
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.");
-          continue;
-        } else {
-          id = int.parse(input);
-          break;
-        }
-      }
       bool idExist = employeesDetails.any((employee) => employee["id"] == id);
       print("");
       if (idExist) {
@@ -225,22 +160,8 @@ removeEmployee() {
   } else {
     print("Remove all or only 1 ?");
     print("");
-    while (true) {
-      stdout.write("1 for Remove all or 2 for only one: ");
-      String? input = stdin.readLineSync();
 
-      if (input == null || input.isEmpty) {
-        print("Invalid Input!");
-        continue;
-      }
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
+    option = readValidNumberInput("1 for Remove all or 2 for only one: ");
 
     if (option == 1) {
       employeesDetails.clear();
@@ -249,22 +170,7 @@ removeEmployee() {
     } else {
       int? id;
 
-      while (true) {
-        stdout.write("Enter employee id, Who you want to remove: ");
-        String? input = stdin.readLineSync();
-
-        if (input == null || input.isEmpty) {
-          print("Invalid Input!");
-          continue;
-        }
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.");
-          continue;
-        } else {
-          id = int.parse(input);
-          break;
-        }
-      }
+      id = readValidNumberInput("Enter employee id, Who you want to remove: ");
 
       bool idExist = employeesDetails.any((employee) => employee["id"] == id);
 
@@ -305,45 +211,18 @@ updateEmployee() {
       if (option == "yes" || option == "Yes") {
         int? options;
 
-        while (true) {
-          print("Edit Email , phone or Password");
-          print("For email: 1");
-          print("For number: 2");
-          print("For password: 3");
+        print("Edit Email , phone or Password");
 
-          String? input = stdin.readLineSync();
-
-          if (input == null || input.isEmpty) {
-            print("Invalid Input!");
-            continue;
-          }
-          if (!RegExp(r'^\d+$').hasMatch(input)) {
-            print("\nString input Not allowed! Use only numbers.");
-            continue;
-          } else {
-            options = int.parse(input);
-            break;
-          }
-        }
+        options = readValidNumberInput("""
+For email: 1
+For number: 2
+For password: 3 
+""");
 
         if (options == 1) {
           print("/Editing Email/");
-          while (true) {
-            stdout.write("Enter Employee id: ");
-            String? input = stdin.readLineSync();
 
-            if (input == null || input.isEmpty) {
-              print("Invalid Input!");
-              continue;
-            }
-            if (!RegExp(r'^\d+$').hasMatch(input)) {
-              print("\nString input Not allowed! Use only numbers.");
-              continue;
-            } else {
-              id = int.parse(input);
-              break;
-            }
-          }
+          id = readValidNumberInput("Enter Employee id: ");
 
           bool idExist =
               employeesDetails.any((employee) => employee['id'] == id);
@@ -363,42 +242,14 @@ updateEmployee() {
           print("/Editing Number/");
           print("");
 
-          while (true) {
-            stdout.write("Enter Employee id: ");
-            String? input = stdin.readLineSync();
+          id = readValidNumberInput("Enter Employee id: ");
 
-            if (input == null || input.isEmpty) {
-              print("Invalid Input!");
-              continue;
-            }
-            if (!RegExp(r'^\d+$').hasMatch(input)) {
-              print("\nString input Not allowed! Use only numbers.");
-              continue;
-            } else {
-              id = int.parse(input);
-              break;
-            }
-          }
           bool idExist =
               employeesDetails.any((employee) => employee['id'] == id);
 
           if (idExist) {
-            while (true) {
-              stdout.write("Enter New number: ");
-              String? input = stdin.readLineSync();
+            number = readValidNumberInput("Enter New number: ");
 
-              if (input == null || input.isEmpty) {
-                print("Invalid Input!");
-                continue;
-              }
-              if (!RegExp(r'^\d+$').hasMatch(input)) {
-                print("\nString input Not allowed! Use only numbers.");
-                continue;
-              } else {
-                number = int.parse(input);
-                break;
-              }
-            }
             final employee =
                 employeesDetails.firstWhere((employee) => employee["id"] == id);
             employee["phone"] = number;
@@ -411,22 +262,9 @@ updateEmployee() {
         } else if (options == 3) {
           print("/Changing password/");
           print("");
-          while (true) {
-            stdout.write("Enter Employee id: ");
-            String? input = stdin.readLineSync();
 
-            if (input == null || input.isEmpty) {
-              print("Invalid Input!");
-              continue;
-            }
-            if (!RegExp(r'^\d+$').hasMatch(input)) {
-              print("\nString input Not allowed! Use only numbers.\n");
-              continue;
-            } else {
-              id = int.parse(input);
-              break;
-            }
-          }
+          id = readValidNumberInput("Enter Employee id: ");
+
           bool idExist = employeeLogin.any((employee) => employee['id'] == id);
 
           if (idExist) {
@@ -466,43 +304,16 @@ displayEmployeeLogin() {
       break;
     }
     print("");
-    while (true) {
-      print("Display only one Employee Login Details press: 1");
-      print("Display all Employee Login Details press: 2");
-      print("for exit press: 0");
 
-      String? input = stdin.readLineSync();
+    option = readValidNumberInput("""
+Display only one Employee Login Details press: 1
+Display all Employee Login Details press: 2
+for exit press: 0
+""");
 
-      if (input == null || input.isEmpty) {
-        print("Invalid Input!");
-        continue;
-      }
-      if (!RegExp(r'^\d+$').hasMatch(input)) {
-        print("\nString input Not allowed! Use only numbers.");
-        continue;
-      } else {
-        option = int.parse(input);
-        break;
-      }
-    }
     if (option == 1) {
       print("");
-      while (true) {
-        stdout.write("Enter Employee id: ");
-        String? input = stdin.readLineSync();
-
-        if (input == null || input.isEmpty) {
-          print("Invalid Input!");
-          continue;
-        }
-        if (!RegExp(r'^\d+$').hasMatch(input)) {
-          print("\nString input Not allowed! Use only numbers.\n");
-          continue;
-        } else {
-          id = int.parse(input);
-          break;
-        }
-      }
+      id = readValidNumberInput("Enter Employee id: ");
 
       bool idExist = employeeLogin.any((employee) => employee["id"] == id);
       print("");
@@ -540,22 +351,11 @@ employeeAccess() {
   int? option;
   print("============== Employee Access ============= \n");
   while (true) {
-    print("1 for client data");
-    print("2 for client's project");
-    print("0 for Exit");
-
-    String? input = stdin.readLineSync();
-
-    if (input == null || input.isEmpty) {
-      print("Invalid Input");
-      continue;
-    }
-    if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("\nString input Not allowed! Use only numbers.\n");
-      continue;
-    } else {
-      option = int.parse(input);
-    }
+    option = readValidNumberInput("""
+1 for client data"
+2 for client's project"
+0 for Exit"
+""");
 
     if (option == 1) {
       displayClient();
