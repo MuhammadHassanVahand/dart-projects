@@ -57,7 +57,7 @@ addEmployee() {
 
     for (var i = 0; i < employeesDetails.length; i++) {
       if (eId == employeesDetails[i]["id"]) {
-        print("$eId is already exist! try another one");
+        print("\n$eId is already exist! try another one");
         isUnique = false;
         break;
       }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 int readValidNumberInput(String type) {
   while (true) {
-    print("");
     stdout.write("$type");
     String? input = stdin.readLineSync();
 
@@ -12,7 +11,7 @@ int readValidNumberInput(String type) {
     }
 
     if (!RegExp(r'^\d+$').hasMatch(input)) {
-      print("String input not allowed! Please use only numbers.");
+      print("\nString input not allowed! Please use only numbers.\n");
       continue;
     }
 
