@@ -15,7 +15,6 @@ List<Map<String, dynamic>> employeeLogin = [];
 adminLoginProcess() {
   int? options;
   print("Login As Admin");
-
   print("");
   stdout.write("Enter your email: ");
   String email = stdin.readLineSync()!;
@@ -31,19 +30,21 @@ adminLoginProcess() {
       print("");
       print("Login Successful!");
       print("");
-
-      options = readValidNumberInput("""
+      while (true) {
+        options = readValidNumberInput("""
 
 1 for admin;
 0 for exit;
-      """);
+""");
 
-      if (options == 1) {
-        adminBlock();
-      } else if (options == 0) {
-        break;
-      } else {
-        print("Invalid Input!");
+        if (options == 1) {
+          adminBlock();
+        } else if (options == 0) {
+          break;
+        } else {
+          print("Invalid Input!");
+          continue;
+        }
       }
     }
   }
@@ -78,17 +79,19 @@ employeeLoginProcess() {
         print("Login Successful!");
         print("");
 
-        options = readValidNumberInput("""
+        while (true) {
+          options = readValidNumberInput("""
 1 for Employee Section
 0 for exit
-        """);
+""");
 
-        if (options == 1) {
-          employeeAccess();
-        } else if (options == 0) {
-          break;
-        } else {
-          print("Invalid Input!");
+          if (options == 1) {
+            employeeAccess();
+          } else if (options == 0) {
+            break;
+          } else {
+            print("Invalid Input!");
+          }
         }
       }
     }

@@ -18,7 +18,8 @@ For display Employee press: 2
 For remove Employee press: 3 
 For update Employee press: 4 
 For display Employee's Loggin Details press: 5 
-For exit press: 0 """);
+For exit press: 0 
+""");
 
     if (option == 1) {
       addEmployee();
@@ -108,7 +109,8 @@ displayEmployee() {
     option = readValidNumberInput("""
 Display only one Employee press: 1
 Display all Employee press: 2
-For exit press: 0""");
+For exit press: 0
+""");
 
     if (option == 1) {
       print("");
@@ -121,6 +123,7 @@ For exit press: 0""");
       if (idExist) {
         final employeeDetail =
             employeesDetails.firstWhere((employee) => employee["id"] == id);
+        print("");
         print("Employee id: ${employeeDetail["id"]}");
         print("Employee name: ${employeeDetail["name"]}");
         print("Employee email: ${employeeDetail["email"]}");

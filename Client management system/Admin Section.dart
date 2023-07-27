@@ -13,18 +13,18 @@ adminBlock() {
 For emplyee Section press 1 
 For client Section press: 2 
 For exit press: 0
-      """);
+""");
 
     if (option == 1) {
       employeeSection();
     } else if (option == 2) {
       clientSection();
     } else if (option == 0) {
-      false;
       break;
     } else {
       print("");
       print("Invalid Input");
+      continue;
     }
   }
 }
